@@ -1,71 +1,38 @@
-let btn = document.querySelector(".covert");
-
-
-let pbAPI = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5';
-// let json = require("https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5");
-let request = new XMLHttpRequest();
+const btn = document.querySelector(".covert");
+const pbAPI = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5';
+const request = new XMLHttpRequest();
 request.open('GET', pbAPI);
 request.responseType = "json";
 request.send();
 
-request.onload = function(){
-    let carrency = request.response;
-    //usa
-    let sale = carrency[0].sale;
-    let buy = carrency[0].buy;
-   
-   // console.log(valuta);
+request.onload = function loadJson(){           
+    const currency = request.response;
+    let sumSale;
+    let sumBuy;
+    let sum;
 
-    btn.onclick = () => {
-        let sumSale;
-        let sumBuy;
-        let input = document.querySelector(".inp").value;
-        let select = document.querySelector(".current").value;
-        let out = document.querySelector("#out");
-
-        if(select == 1){
-            sumSale = input * sale;
-            sumBuy = input * buy;
-            out.innerHTML = `продаж: ${sumSale.toFixed(3)} грн,
-             купівля: ${sumBuy.toFixed(3)} грн.`;
-            
-        } else if(select == 2){
-            sumSale = input / sale;
-            sumBuy = input / buy;
-            out.innerHTML = `продаж: ${sumSale.toFixed(3)} дрлв,
-             купівля: ${sumBuy.toFixed(3)} дрлв.`;
-        } 
+    btn.onclick = function() {
+      return calculate();  
     }
+
     
+    function calculate(){
+      const input = document.querySelector(".inp").value;
+      const select = document.querySelector(".current").value;
+      const selectOut = document.querySelector(".currentOut").value;
+      const out = document.querySelector("#out");
+
+
+      for(let key in currency){
+
+        if(select === currency[key].ccy && selectOut === currency[key].base_ccy){
+           sumSale = input *  currency[key].sale;
+           out.innerHTML = `на виході буде ${sumSale.toFixed(3)}`;
+           
+      } else if( select === "UAH" &&  selectOut === currency[key].ccy){
+        sumBuy = input /  currency[key].buy;
+        out.innerHTML = `на виході буде ${sumBuy.toFixed(3)}`;
+      } 
+    }
+  }
 }
-
-// buy sale [0]
-
-
-
-
-// btn.onclick = () => {
-//     let current = document.querySelector(".current").value;
-//     let input = document.querySelector(".inp").value;
-//     let out = document.querySelector("#out");
-//     let sum;
-//         if(current == 1){
-//             sum = input * 23;
-//             console.log(sum.toFixed(2));
-            
-//         } else if( current == 2){
-//             sum = input / 24;
-//             console.log(sum.toFixed(2));
-            
-//         }
-//         // out.innerHTML = sum;
-//     // return false;
-    
-// }
-
-console.log(request);
-
-
-
-
-
