@@ -12,25 +12,46 @@ request.onload = function loadJson() {
     let sum;
 
     btn.onclick = function () {
-        return calculate();
+        return formula();
     }
+
+
+
+
+    function formula(){
+    for (let key in currency) {
+        const input = document.querySelector(".inp").value;
+        const out = document.querySelector("#out");
+        const selectOut = document.querySelector(".currentOut").value;
+        const selectIn = document.querySelector(".current").value;
+
+        if (selectOut === currency[key].ccy) {
+            console.log(request);
+            console.log(currency[key].ccy);
+            sumSale = input / currency[key].buy;
+            out.innerHTML = `на виході буде ${sumSale.toFixed(3)} ${selectOut} `;
+        } else if(selectIn === currency[key].ccy){
+            sumSale = currency[key].sale * input;
+            out.innerHTML = `на виході буде ${sumSale.toFixed(3)} ${selectOut} `;
+        } 
+        
+        
+        else if(selectIn ===  selectOut) {
+            sumSale = input * 1;
+            out.innerHTML = `на виході буде ${sumSale.toFixed(3)} ${selectIn} `;
+        }
+       
+    }
+}
 
 
     function calculate() {
-        const select = document.querySelector(".current").value;
-        if (select == "UAH") {
-            return currencyUAH();
-        }
-    }
-
-
-    function currencyUAH() {
-
+        const cur = currency[key].ccy;
         const input = document.querySelector(".inp").value;
         const out = document.querySelector("#out");
         const selectOut = document.querySelector(".currentOut").value;
 
-        if (selectOut == "USD") {
+        if (selectOut == cur) {
             console.log(request);
             sumSale = input / currency[0].buy;
             out.innerHTML = `на виході буде ${sumSale.toFixed(3)} usd`;
