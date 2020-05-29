@@ -8,30 +8,34 @@
 </head>
 <body>
 
-    <div class="container">
-            <p>Перевести у</p>
-            <select name="" class="current">
-                    <option value="UAH">Гривні</option>
-                    <option value="USD">Доллари</option>
-                </select>
-<p>у</p>
-<select name="" class="currentOut">
-    <option value="UAH">Гривні</option>
-    <option value="USD">Доллари</option>
-</select>
-<br>
-<span>суму</span>
-<p>
-    <input type="number" class="inp" placeholder="вкажіть сумму">
-   </p>
-        <input type="button" value="Конвертувати"  class="covert">
-    
+<div class="container">
+    <p>Перевести</p>
+    <select name="" class="current">
+        <option value="UAH">Гривні</option>
+        <o<option value="USD">Доллари</option>
+        <option value="EUR">EUR</option>
+        <option value="RUR">RUR</option>
+    </select>
+    <p>у</p>
+    <select name="" class="currentOut">
+        <option value="UAH">Гривні</option>
+        <option value="USD">Доллари</option>
+        <option value="EUR">EUR</option>
+        <option value="RUR">RUR</option>
+    </select>
+    <br>
+    <span>суму</span>
+    <p>
+        <input type="number" class="inp" placeholder="вкажіть сумму">
+    </p>
+    <input type="button" value="Конвертувати" id="convert">
+
     <p id="out"></p>
-    </div>
-    
-    <script src="index.js"></script>
-    <script src="obj.js"></script>
-    <script src="array.js"></script>
-    <script src="convert.js"></script>
+</div>
+
+<!--<script src="index.js"></script>-->
+<!--<script src="obj.js"></script>-->
+<!--<script src="array.js"></script>-->
+<script src="convert.js"></script>
 </body>
 </html>
